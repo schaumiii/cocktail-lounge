@@ -11,15 +11,33 @@
             descending: true,
             limit: 10,
             success: function (cocktailDocs) {
-                var cocktailList = '<ul>';
+                $.Mustache.load('./templates/cocktail-listitem.html')
+                    .done(function () {
+                        var cocktailData = cocktailDocs.rows.map(function (row) {
+                            return row.value;
+                        });
 
-                cocktailDocs.rows.forEach(function (cocktailDoc) {
-                    cocktailList += '<li>' + cocktailDoc.value.title + (cocktailDoc.value.non_alcoholic ? ' <i class="fa fa-car"></i>' : ' ') + '</li>';
-                });
+                        $('#cocktail-lounge-latest-cocktails')
+                            .mustache(
+                                'cocktail-lounge-cocktail-listitem',
+                                {cocktails: cocktailData},
+                                {method: 'html'}
+                            );
 
-                cocktailList += '</ul>';
+                        $('.cocktail-lounge-view-recipe').click(function (event) {
+                            event.preventDefault();
 
-                $('#cocktail-lounge-latest-cocktails').html(cocktailList);
+                            $.get(
+                                '_show/recipe/' + $(this).attr('href'),
+                                null,
+                                function (data) {
+                                    $('#cocktail-lounge-content-recipe').html(data);
+
+                                    CocktailLounge.util.showContent('recipe');
+                                }
+                            )
+                        });
+                    });
             }
         });
     };

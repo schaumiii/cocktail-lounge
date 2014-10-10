@@ -3,9 +3,21 @@ var CocktailLounge = CocktailLounge || {};
 (function(jQuery, CocktailLounge){
     "use strict";
 
-    var trim = function (string) {
+    var trim,
+        showContent;
+
+    trim = function (string) {
         // thanks to @jakobwesthoff for this trim regexp ;-)
         return string.replace(/^\s*\s*|\s*$/, '');
+    };
+
+    showContent = function(page) {
+        // remove last active class
+        $('ul.nav > li').removeClass('active');
+        // hide old pages
+        $('.cocktail-lounge-content').hide();
+        // show actual page
+        $('#cocktail-lounge-content-' + page).removeClass('hidden').show();
     };
 
     // friendly helper http://tinyurl.com/6aow6yn
@@ -26,6 +38,7 @@ var CocktailLounge = CocktailLounge || {};
     };
 
     CocktailLounge.util= {
-        trim: trim
+        trim: trim,
+        showContent: showContent
     };
 })($, CocktailLounge);

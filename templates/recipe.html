@@ -1,0 +1,17 @@
+<h1>{{title}} {{#non_alcoholic}}(<i class="fa fa-car"></i>){{/non_alcoholic}}</h1>
+<div class="container" id="cocktail-lounge-ingredients">
+    <dl class="dl-horizontal">
+        <dt>Ingredients</dt>
+        <dd>
+            {{#ingredients}}
+            <p>{{.}}</p>
+            {{/ingredients}}
+        </dd>
+    </dl>
+</div>
+<div class="container" id="cocktail-lounge-recipe">
+    {{description}}
+</div>
+<div class="container">
+    <small>Inserted at {{created_at}}</small>
+</div>
