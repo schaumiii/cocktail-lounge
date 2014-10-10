@@ -58,7 +58,7 @@
                 $('p.cocktail-lounge-form-feedback-message')
                     .removeClass(['bg-primary', 'bg-info', 'bg-success', 'bg-warning', 'bg-danger'])
                     .addClass('bg-danger')
-                    .html(textStatus);
+                    .html(errorThrown);
             }
         });
 
