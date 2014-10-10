@@ -1,4 +1,6 @@
-(function(jQuery){
+var CocktailLounge = CocktailLounge || {};
+
+(function(jQuery, CocktailLounge){
     "use strict";
 
     var trim = function (string) {
@@ -23,7 +25,7 @@
         return o;
     };
 
-    module.exports = {
+    CocktailLounge.util= {
         trim: trim
     };
-})($);
+})($, CocktailLounge);
