@@ -2,9 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cocktail-Lounge</title>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.css"/>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap-theme.css"/>
+    <link type="text/css" rel="stylesheet" href="css/font-awesome.min.css"/>
+    <link type="text/css" rel="stylesheet" href="css/app.css"/>
 </head>
 <body>
-<h1>Cocktail App under construction</h1>
+<nav class="nav navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#cocktail-lounge-navbar-toggeling">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><i class="fa fa-glass">Cocktail-Lounge</i></a>
+        </div>
+        <div class="collapse navbar-collapse" id="cocktail-lounge-navbar-toggeling">
+            <ul class="nav navbar-nav navbar-left">
+                <li class="active"><a href="#" data-target="home">Home</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container cocktail-lounge-content" id="cocktail-lounge-content-home">
+    <h1>Latest cocktails</h1>
+    <div class="container" id="cocktail-lounge-latest-cocktails"></div>
+    <button class="btn btn-default" id="cocktail-lounge-load-recent-button"><i class="fa fa-refresh"></i></button>
+</div>
+<script language="javascript" src="js/jquery.js"></script>
+<script language="javascript" src="js/bootstrap.js"></script>
+<script language="javascript" src="js/jquery.couch.js"></script>
+<script language="javascript" src="js/app.js"></script>
+<script language="javascript" src="js/navigation.js"></script>
 </body>
 </html>
