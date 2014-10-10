@@ -16,6 +16,8 @@ var CocktailLounge = CocktailLounge || {};
         $('ul.nav > li').removeClass('active');
         // hide old pages
         $('.cocktail-lounge-content').hide();
+        // clearing maybe existing "flash messages"
+        $('.cocktail-lounge-form-feedback-message').html('');
         // show actual page
         $('#cocktail-lounge-content-' + page).removeClass('hidden').show();
     };

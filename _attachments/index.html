@@ -27,6 +27,12 @@
                 <li class="active"><a href="#" id="cocktail-lounge-homelink" data-target="home">Home</a></li>
                 <li><a href="#" data-target="add">Add</a></li>
             </ul>
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                    <i class="fa fa-search"></i>
+                    <input type="text" class="form-control" id="cocktail-lounge-search-field" placeholder="Search by ingredient…">
+                </div>
+            </form>
         </div>
     </div>
 </nav>
@@ -36,6 +42,10 @@
     <button class="btn btn-default" id="cocktail-lounge-load-recent-button"><i class="fa fa-refresh"></i></button>
 </div>
 <div class="container cocktail-lounge-content" id="cocktail-lounge-content-recipe"></div>
+<div class="container cocktail-lounge-content hidden" id="cocktail-lounge-content-searchresult">
+    <h1>Search result for &quot;<span id="cocktail-lounge-searchkey"></span>&quot;</h1>
+    <div class="container" id="cocktail-lounge-searchresult"></div>
+</div>
 <div class="container cocktail-lounge-content hidden" id="cocktail-lounge-content-add">
     <h1>Add new cocktail recipe</h1>
     <p class="cocktail-lounge-form-feedback-message"></p>

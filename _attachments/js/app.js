@@ -3,7 +3,8 @@
     var path = decodeURI(document.location.pathname).split('/'),
         designDocName = path[3],
         db = $.couch.db(path[1]),
-        loadRecentCocktails;
+        loadRecentCocktails,
+        addRecipeViewHandler;
 
 
     loadRecentCocktails = function () {
@@ -24,19 +25,7 @@
                                 {method: 'html'}
                             );
 
-                        $('.cocktail-lounge-view-recipe').click(function (event) {
-                            event.preventDefault();
-
-                            $.get(
-                                '_show/recipe/' + $(this).attr('href'),
-                                null,
-                                function (data) {
-                                    $('#cocktail-lounge-content-recipe').html(data);
-
-                                    CocktailLounge.util.showContent('recipe');
-                                }
-                            )
-                        });
+                        addRecipeViewHandler();
                     });
             }
         });
@@ -76,9 +65,53 @@
         return false;
     });
 
+    $('#cocktail-lounge-search-field').keydown(function (event) {
+        if ( event.which === 13 ) {
+            event.preventDefault();
+
+            var searchField = $('#cocktail-lounge-search-field');
+
+            $.post(
+                '_list/searchresult/recipes-by-ingredients',
+                JSON.stringify({keys: [searchField.val()]}),
+                function (data) {
+                    CocktailLounge.util.showContent('searchresult');
+
+                    $('#cocktail-lounge-searchkey').text(searchField.val());
+                    searchField.val('').blur();
+
+                    $('#cocktail-lounge-searchresult').html(data);
+
+                    addRecipeViewHandler();
+
+                },
+                'html'
+            );
+        }
+    });
+
+    addRecipeViewHandler = function() {
+        $('.cocktail-lounge-view-recipe').click(function (event) {
+            event.preventDefault();
+
+            $.get(
+                '_show/recipe/' + $(this).attr('href'),
+                null,
+                function (data) {
+                    $('#cocktail-lounge-content-recipe').html(data);
+
+                    CocktailLounge.util.showContent('recipe');
+                }
+            )
+        });
+    };
+
     $(document).ready(function() {
         $('#cocktail-lounge-load-recent-button').click(loadRecentCocktails);
         $('#cocktail-lounge-homelink').click(loadRecentCocktails);
+
+
+
         loadRecentCocktails();
     });
 })();
