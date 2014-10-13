@@ -5,8 +5,10 @@
         db = $.couch.db(path[1]),
         loadRecentCocktails,
         addRecipeViewHandler,
-        reloadIngredients;
+        reloadIngredients,
+        pouchDb;
 
+    pouchDb = new PouchDB(window.location.protocol + '//' + window.location.hostname + ':' + window.location.port + '/cocktail-lounge/');
 
     loadRecentCocktails = function () {
         db.view(designDocName + '/recipes', {
@@ -47,11 +49,23 @@
         doc.type = 'cocktail-recipe';
 
         db.saveDoc(doc, {
-            success: function () {
+            success: function (doc) {
+                var attachment;
+
                 $('p.cocktail-lounge-form-feedback-message')
                     .removeClass(['bg-primary', 'bg-info', 'bg-warning', 'bg-danger'])
                     .addClass('bg-success')
                     .html('Successfully added new recipe!');
+
+                attachment = $('#cocktail-lounge-add-image')[0].files[0];
+
+                if (typeof attachment !== 'undefined') {
+                    pouchDb.putAttachment(doc.id, 'image', doc.rev, attachment, attachment.type, function (error, doc) {
+                        if (error) {
+                            console.log(error);
+                        }
+                    });
+                }
 
                 // unfortunately the select2 does not react on form reset, so we "reset" it manually
                 $('#cocktail-lounge-add-ingredients').val('').trigger('change');
@@ -97,7 +111,7 @@
             event.preventDefault();
 
             $.get(
-                '_show/recipe/' + $(this).attr('href'),
+                '/recipe/' + $(this).attr('href'),
                 null,
                 function (data) {
                     $('#cocktail-lounge-content-recipe').html(data);

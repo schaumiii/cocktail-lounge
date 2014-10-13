@@ -1,4 +1,9 @@
 <h1>{{title}} {{#non_alcoholic}}(<i class="fa fa-car"></i>){{/non_alcoholic}}</h1>
+{{#_attachments}}
+<div class="container">
+    <img src="/cocktail-lounge/{{_id}}/image" class="img-rounded" height="200px" alt="Image">
+</div>
+{{/_attachments}}
 <div class="container" id="cocktail-lounge-ingredients">
     <dl class="dl-horizontal">
         <dt>Ingredients</dt>
