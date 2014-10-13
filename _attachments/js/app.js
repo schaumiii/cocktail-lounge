@@ -1,6 +1,6 @@
 (function () {
     "use strict";
-    var path = decodeURI(document.location.pathname).split('/'),
+    var path = decodeURI("/cocktail-lounge/_design/cocktail-lounge/_rewrite/").split('/'),
         designDocName = path[3],
         db = $.couch.db(path[1]),
         loadRecentCocktails,
@@ -75,7 +75,7 @@
             var searchField = $('#cocktail-lounge-search-field');
 
             $.post(
-                '_list/searchresult/recipes-by-ingredients',
+                './search',
                 JSON.stringify({keys: [searchField.val()]}),
                 function (data) {
                     CocktailLounge.util.showContent('searchresult');

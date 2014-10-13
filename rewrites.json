@@ -1,0 +1,9 @@
+[
+    {"from": "", "to": "index.html", "method": "GET", "query": {}},
+    {"from": "/cocktail-lounge/_design/cocktail-lounge/*", "to": "./*", "method": "*", "query": {},
+        "comment": "hacky solution to work around jquery couchdb | YOU DON'T WANT TO DO THIS, THAT WAY!!"},
+    {"from": "/cocktail-lounge/", "to": "./../../*", "method": "POST", "query": {},
+        "comment": "hacky solution to work around jquery couchdb | YOU DON'T WANT TO DO THIS, THAT WAY!!"},
+    {"from": "/*", "to": "./*", "method": "GET", "query": {}},
+    {"from": "/search", "to": "_list/searchresult/recipes-by-ingredients", "method": "POST", "query": {}}
+]
