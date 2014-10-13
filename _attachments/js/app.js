@@ -4,7 +4,8 @@
         designDocName = path[3],
         db = $.couch.db(path[1]),
         loadRecentCocktails,
-        addRecipeViewHandler;
+        addRecipeViewHandler,
+        reloadIngredients;
 
 
     loadRecentCocktails = function () {
@@ -52,6 +53,8 @@
                     .addClass('bg-success')
                     .html('Successfully added new recipe!');
 
+                // unfortunately the select2 does not react on form reset, so we "reset" it manually
+                $('#cocktail-lounge-add-ingredients').val('').trigger('change');
                 form.reset();
             },
             error: function (request, textStatus, errorThrown) {
@@ -83,7 +86,6 @@
                     $('#cocktail-lounge-searchresult').html(data);
 
                     addRecipeViewHandler();
-
                 },
                 'html'
             );
@@ -106,11 +108,30 @@
         });
     };
 
+    reloadIngredients = function () {
+        // Ingredient suggestion
+        db.view(designDocName + '/ingredients', {
+            success: function (data) {
+                var ingredients = [];
+                if (data.rows && data.rows.length > 0 && data.rows[0].value) {
+                    ingredients = data.rows[0].value;
+                }
+
+                $('#cocktail-lounge-add-ingredients').select2({
+                    tags: ingredients,
+                    allowClear: true
+                });
+            }
+        });
+    };
+
     $(document).ready(function() {
         $('#cocktail-lounge-load-recent-button').click(loadRecentCocktails);
         $('#cocktail-lounge-homelink').click(loadRecentCocktails);
 
-
+        // Hack for fixing that the first initialization removes the focus.
+        reloadIngredients();
+        $('#cocktail-lounge-add-ingredients').focus(reloadIngredients);
 
         loadRecentCocktails();
     });
