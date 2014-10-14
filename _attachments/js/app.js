@@ -140,8 +140,12 @@
     };
 
     $(document).ready(function() {
+        var changesFeed;
+
         $('#cocktail-lounge-load-recent-button').click(loadRecentCocktails);
-        $('#cocktail-lounge-homelink').click(loadRecentCocktails);
+
+        changesFeed = db.changes();
+        changesFeed.onChange(loadRecentCocktails);
 
         // Hack for fixing that the first initialization removes the focus.
         reloadIngredients();
